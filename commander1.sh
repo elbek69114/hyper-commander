@@ -1,23 +1,27 @@
 #!/bin/bash
 
+implement() {
+    echo "Not implemented!"
+}
+
 process() {
     local choice=$1
-    case $choice in
+    case "$choice" in
         0)
             echo "Farewell!"
             exit 0
             ;;
         1)
-            echo "Not implemented!"
+            implement
             ;;
         2)
-            echo "Not implemented!"
+            implement
             ;;
         3)
-            echo "Not implemented!"
+            implement
             ;;
         4)
-            echo "Not implemented!"
+            implement
             ;;
         *)
             echo "Invalid option!"
@@ -25,7 +29,7 @@ process() {
     esac
 }
 
-echo "Hello $USER"
+echo "Hello $USER!"
 
 while true; do
     echo "------------------------------"
@@ -36,6 +40,6 @@ while true; do
     echo "| 3: File and Dir operations |"
     echo "| 4: Find Executables        |"
     echo "------------------------------"
-    read choice
-    process $choice
+    read -r choice
+    process "$choice"
 done
