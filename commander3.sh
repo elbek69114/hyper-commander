@@ -1,0 +1,86 @@
+#!/bin/bash
+
+implement() {
+    echo "Not implemented!"
+}
+
+os_info() {
+    uname -o -n
+}
+
+user_info() {
+    whoami
+}
+
+
+file_and_dir_operations() {
+    while true; do
+        echo -e "\nThe list of files and directories:"
+        arr=(*)
+        for item in "${arr[@]}"; do
+            if [[ -f "$item" ]]; then
+                echo "F $item"
+            elif [[ -d "$item" ]]; then
+                echo "D $item"
+            fi
+        done
+
+        echo ""
+        echo "----------------------------------------------------"
+        echo "| 0 Main menu | 'up' To parent | 'name' To select |"
+        echo "----------------------------------------------------"
+        read -r choice
+
+        if [[ "$choice" == "0" ]]; then
+            break
+        elif [[ "$choice" == "up" ]]; then
+            implement
+        elif [[ -f "$choice" ]]; then
+            implement
+        elif [[ -d "$choice" ]]; then
+            implement
+        else
+            echo "Invalid input!"
+        fi
+    done
+}
+
+process() {
+    local choice=$1
+    case "$choice" in
+        0)
+            echo "Farewell!"
+            exit 0
+            ;;
+        1)
+            os_info
+            ;;
+        2)
+            user_info
+            ;;
+        3)
+            file_and_dir_operations
+            ;;
+        4)
+            implement
+            ;;
+        *)
+            echo "Invalid option!"
+            ;;
+    esac
+}
+
+echo "Hello $USER!"
+
+while true; do
+    echo "------------------------------"
+    echo "| Hyper Commander            |"
+    echo "| 0: Exit                    |"
+    echo "| 1: OS info                 |"
+    echo "| 2: User info               |"
+    echo "| 3: File and Dir operations |"
+    echo "| 4: Find Executables        |"
+    echo "------------------------------"
+    read -r choice
+    process "$choice"
+done
